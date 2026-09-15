@@ -20,7 +20,8 @@ config = context.config
 
 # Use DATABASE_URL from our own app settings instead of alembic.ini,
 # so the same env var used by Render/local dev drives migrations too.
-config.set_main_option("sqlalchemy.url", get_settings().DATABASE_URL)
+db_url = get_settings().DATABASE_URL.replace("%", "%%")
+config.set_main_option("sqlalchemy.url", db_url)
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
